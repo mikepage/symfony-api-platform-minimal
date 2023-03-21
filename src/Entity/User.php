@@ -17,7 +17,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Serializer\Groups(groups: ['user-get', 'user-list'])]
+    #[Serializer\Groups(groups: ['id'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]

@@ -49,7 +49,7 @@ class UserRepository extends BaseRepository implements UserLoaderInterface
         return $paginator->getIterator();
     }
 
-    public function listCountQuery(array $params)
+    public function listCountQuery(array $params): ?int
     {
         $properties = $this->getProperties($params);
 

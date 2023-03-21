@@ -13,7 +13,7 @@ class OrganisationRepository extends BaseRepository
         parent::__construct($registry, Organisation::class);
     }
 
-    public function findQuery(array $params)
+    public function findQuery(array $params): ?Organisation
     {
         $properties = $this->getProperties($params);
 
@@ -35,7 +35,7 @@ class OrganisationRepository extends BaseRepository
         return $paginator->getIterator();
     }
 
-    public function listCountQuery(array $params)
+    public function listCountQuery(array $params): ?int
     {
         $properties = $this->getProperties($params);
 

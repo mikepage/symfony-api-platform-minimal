@@ -12,7 +12,7 @@ class OrganisationRelation
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Serializer\Groups(groups: ['organisation-relation-get', 'organisation-relation-list'])]
+    #[Serializer\Groups(groups: ['id'])]
     private ?int $id = null;
 
     #[ORM\Column]
@@ -26,6 +26,7 @@ class OrganisationRelation
 
     #[ORM\ManyToOne(inversedBy: 'organisationRelations')]
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', onDelete: 'set null')]
+    #[Serializer\Ignore]
     private ?User $user = null;
 
     public function getId(): ?int

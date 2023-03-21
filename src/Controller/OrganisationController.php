@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class OrganisationController extends BaseController
 {
 
-    #[Route('/api/organisations', name: 'app_organisation_index')]
+    #[Route('/api/organisations')]
     public function index(Request $request, OrganisationRepository $organisationRepository): JsonResponse
     {
         $params = $request->query->all();
@@ -23,6 +23,7 @@ class OrganisationController extends BaseController
         ],
             context: [
                 'groups' => [
+                    'id',
                     'organisation-list',
                 ]
             ]);

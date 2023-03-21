@@ -11,8 +11,10 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class BaseController extends AbstractController
 {
-    public function __construct(protected SerializerInterface $serializer, protected EntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        protected SerializerInterface $serializer,
+        protected EntityManagerInterface $entityManager
+    ) {
     }
 
     protected function json(

@@ -2,23 +2,25 @@
 
 namespace App\Controller;
 
-use App\Repository\UserRepository;
+use App\Repository\OrganisationRelationRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class UserController extends BaseController
+class OrganisationRelationController extends BaseController
 {
 
-    #[Route('/api/users')]
-    public function index(Request $request, UserRepository $userRepository): JsonResponse
-    {
+    #[Route('/api/organisation-relations')]
+    public function index(
+        Request $request,
+        OrganisationRelationRepository $organisationRelationRepository
+    ): JsonResponse {
         $params = $request->query->all();
 
         return $this->json([
             'result' => [
-                'items' => $userRepository->listQuery($params),
-                'count' => $userRepository->listCountQuery($params),
+                'items' => $organisationRelationRepository->listQuery($params),
+                'count' => $organisationRelationRepository->listCountQuery($params),
             ]
         ],
             context: [
@@ -26,7 +28,6 @@ class UserController extends BaseController
                     'id',
                     'organisation-list',
                     'organisation-relation-list',
-                    'user-list',
                 ]
             ]);
     }

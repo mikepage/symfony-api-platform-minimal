@@ -18,7 +18,7 @@ class Organisation
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Serializer\Groups(groups: ['organisation-get', 'organisation-list'])]
+    #[Serializer\Groups(groups: ['id'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
