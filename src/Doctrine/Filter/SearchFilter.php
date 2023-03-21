@@ -5,6 +5,7 @@ namespace App\Doctrine\Filter;
 use App\Doctrine\Attribute\Filter as Attribute;
 use App\Doctrine\Filter\Strategy\FilterStrategyInterface;
 use App\Doctrine\Filter\Strategy\SearchStrategy;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 
 class SearchFilter extends AbstractFilter
@@ -16,21 +17,23 @@ class SearchFilter extends AbstractFilter
 
     public function applyFilter(
         QueryBuilder $qb,
+        Query\Expr\Andx $conditions,
         string $alias,
         string $property,
         mixed $value,
         ?FilterStrategyInterface $strategy = null,
     ): void {
-        if (!is_string($value)) {
+        if ($value === null || $value === '') {
             return;
         }
 
-        $value = strtolower($value);
+        $value = strtolower((string)$value);
         $value = $this->addWildcards($strategy, $value);
 
         $parameterName = $this->generateParameterName($alias, $property);
+        $condition = sprintf('LOWER(%s.%s) LIKE :%s', $alias, $property, $parameterName);
 
-        $qb->andWhere(sprintf('LOWER(%s.%s) LIKE :%s', $alias, $property, $parameterName));
+        $conditions->add($condition);
         $qb->setParameter($parameterName, $value);
     }
 

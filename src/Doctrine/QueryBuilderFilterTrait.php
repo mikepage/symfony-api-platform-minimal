@@ -34,7 +34,10 @@ trait QueryBuilderFilterTrait
                 continue;
             }
 
-            $filter->applyFilter($qb, $alias, $property, $value, $attribute->getStrategy());
+            $conditions = $qb->expr()->andX();
+            $filter->applyFilter($qb, $conditions, $alias, $property, $value, $attribute->getStrategy());
+
+            $qb->andWhere($conditions);
         }
     }
 

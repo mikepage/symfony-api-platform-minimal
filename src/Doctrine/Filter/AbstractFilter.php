@@ -4,6 +4,7 @@ namespace App\Doctrine\Filter;
 
 use App\Doctrine\Filter\Strategy\FilterStrategyInterface;
 use App\Doctrine\QueryNameHelperTrait;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\Mapping\ClassMetadata;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
@@ -17,6 +18,7 @@ abstract class AbstractFilter
 
     abstract public function applyFilter(
         QueryBuilder $qb,
+        Query\Expr\Andx $conditions,
         string $alias,
         string $property,
         mixed $value,
